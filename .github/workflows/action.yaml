@@ -39,11 +39,11 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
           script: |
             cd sky_pro_f_pr_ci
-            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose up -d
+            echo ${{ secrets.PASSWORD }} | sudo -S docker-compose up -d
 
 
 
