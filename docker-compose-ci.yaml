@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  api:
+    image: gantrel/skypro_nbityutskiy_todolist:$GITHUB_RUN_ID
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+    - 5000:5000
+    env_file:
+      - ./.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+
+  front:
+    image: sermalenk/skypro-front:lesson-36
+    restart: always
+    ports:
+      - "80:80"
+
+  migrations:
+    image: gantrel/skypro_nbityutskiy_todolist:$GITHUB_RUN_ID
+#    command: python migrate http://manage.py
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:13.0-alpine
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+    - "5432:5432"
+
+
+volumes:
+  postgres_data:
+  frontend:
