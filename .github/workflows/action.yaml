@@ -44,6 +44,3 @@ jobs:
           script: |
             cd sky_pro_f_pr_ci
             echo ${{ secrets.PASSWORD }} | sudo -S docker-compose up -d
-
-
-
