@@ -14,4 +14,6 @@ COPY todolist/requirements.txt .
 RUN pip install -r requirements.txt
 
 # copy project
-COPY todolist .
+COPY ./todolist .
+
+#ENTRYPOINT ["python", "manage.py", "migrate", "--noinput"]
