@@ -29,7 +29,7 @@ services:
 
   migrations:
     image: gantrel/skypro_nbityutskiy_todolist:$GITHUB_RUN_ID
-    command: python3 manage.py migrate --noinput
+    command: python manage.py migrate --noinput
     environment:
       DB_HOST: $DB_HOST
       DB_PORT: $DB_PORT
