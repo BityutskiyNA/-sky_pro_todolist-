@@ -29,6 +29,7 @@ services:
 
   migrations:
     image: gantrel/skypro_nbityutskiy_todolist:$GITHUB_RUN_ID
+    command: python3 manage.py migrate --noinput
     environment:
       DB_HOST: $DB_HOST
       DB_PORT: $DB_PORT
@@ -38,7 +39,6 @@ services:
       DJANGO_ALLOWED_HOSTS: $DJANGO_ALLOWED_HOSTS
       SOCIAL_AUTH_VK_OAUTH2_KEY: $SOCIAL_AUTH_VK_OAUTH2_KEY
       SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
-    command: python3 manage.py migrate --noinput
     depends_on:
       postgres:
         condition: service_healthy
