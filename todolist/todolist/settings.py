@@ -4,6 +4,7 @@ from pathlib import Path
 import dj_database_url
 from envparse import env
 
+
 from settings_pd import Settings_TDL
 
 setings_bs = Settings_TDL()
@@ -122,8 +123,6 @@ SOCIAL_AUTH_VK_EXTRA_DATA=[('email','email')]
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL='/logged-in/'
 SOCIAL_AUTH_USER_MODEL='core.User'
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': [
-#         'rest_framework.permissions.IsAuthenticated',
-#     ]
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+}

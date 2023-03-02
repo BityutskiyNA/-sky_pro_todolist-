@@ -4,8 +4,7 @@ from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView,
 from django.contrib.auth import login, logout
 
 from .models import User
-from .serializers import UserCreateSerializer, UserUpdateSerialiser, UserCreatePWSerializer, LoginSerializer, \
-    UpdatePasswordSerializer
+from .serializers import UserCreateSerializer, UserUpdateSerialiser, LoginSerializer, UpdatePasswordSerializer
 from rest_framework.response import Response
 
 class UserCreateView(CreateAPIView):
@@ -24,8 +23,6 @@ class UserLogonView(CreateAPIView):
         login(request=self.request, user=user)
 
 
-
-# @method_decorator(ensure_csrf_cookie)
 class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerialiser
@@ -37,10 +34,6 @@ class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     def destroy(self, request, *args, **kwargs):
         logout(request)
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-class UserUpdateAPIView(UpdateAPIView):
-    model = User
-    serializer_class = UserCreatePWSerializer
 
 class PasswordUpdateAPIView(UpdateAPIView):
     permission_classes =  [IsAuthenticated]

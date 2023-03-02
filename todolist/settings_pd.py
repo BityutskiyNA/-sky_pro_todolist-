@@ -14,6 +14,6 @@ class Settings_TDL(BaseSettings):
     DJANGO_ALLOWED_HOSTS : str
     SOCIAL_AUTH_VK_OAUTH2_KEY: str
     SOCIAL_AUTH_VK_OAUTH2_SECRET:str
-    # class Config:
-    #      env_file = '../.env_local'
-    #     case_sensitive = True
+
+    class Config:
+         env_file = '../.env_local'

@@ -3,7 +3,7 @@ services:
   api:
     image: gantrel/skypro_nbityutskiy_todolist:$GITHUB_RUN_ID
     restart: always
-    command: python manage.py migrate --noinput | python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
     environment:
       DB_HOST: $DB_HOST
       DB_PORT: $DB_PORT

@@ -25,16 +25,11 @@ class UserCreateSerializer(serializers.ModelSerializer):
         del validated_data['password_repeat']
         validated_data['password'] = make_password(validated_data['password'])
         return super().create(validated_data)
+
 class UserUpdateSerialiser(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
-        # fields = ["username","first_name","last_name","email"]
-
-class UserCreatePWSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id','username','first_name','last_name', 'email')
 
 class LoginSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True)

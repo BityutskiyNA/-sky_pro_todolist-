@@ -1,6 +1,8 @@
-from rest_framework import serializers
-from .models import GoalCategory
+from rest_framework import serializers, exceptions
+from .models import GoalCategory, Goal
 from core.models import User
+
+from ..core.serializers import UserUpdateSerialiser
 
 
 class GoalCreateSerializer(serializers.ModelSerializer):
@@ -8,18 +10,33 @@ class GoalCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GoalCategory
-        read_only_fields = ("id", "created", "updated", "user")
-        fields = "__all__"
+        fields = '__all__'
+        read_only_fields = ('id', 'created', 'updated', 'user', 'is_geleted')
 
 
 
 class GoalCategorySerializer(serializers.ModelSerializer):
-    pass
-    # user = UserSerializer(read_only=True)
-    #
-    # class Meta:
-    #     model = GoalCategory
-    #     fields = "__all__"
-    #     read_only_fields = ("id", "created", "updated", "user")
+    user = UserUpdateSerialiser(read_only=True)
 
+    class Meta:
+        model = GoalCategory
+        fields = '__all__'
+        read_only_fields = ('id', 'created', 'updated', 'user', 'is_geleted')
+
+
+class GoalCreateSerializer(serializers.ModelSerializer):
+    category = serializers.PrimaryKeyRelatedField(
+        queryset=GoalCategorySerializer.objects.filter(is_deleted=True)
+    )
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Goal
+        fields = '__all__'
+        read_only_fields = ('id','create','updated', 'user')
+
+    def validate_category(self, value):
+        if self.context['request'].user != value.user:
+            raise exceptions.PermissionDenied
+        return value
 
