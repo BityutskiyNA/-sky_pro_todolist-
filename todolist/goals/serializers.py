@@ -1,8 +1,7 @@
 from rest_framework import serializers, exceptions
 from .models import GoalCategory, Goal
-from core.models import User
 
-from ..core.serializers import UserUpdateSerialiser
+from core.serializers import UserUpdateSerialiser
 
 
 class GoalCreateSerializer(serializers.ModelSerializer):
@@ -25,9 +24,9 @@ class GoalCategorySerializer(serializers.ModelSerializer):
 
 
 class GoalCreateSerializer(serializers.ModelSerializer):
-    category = serializers.PrimaryKeyRelatedField(
-        queryset=GoalCategorySerializer.objects.filter(is_deleted=True)
-    )
+    # category = serializers.PrimaryKeyRelatedField(
+    #     queryset=GoalCategorySerializer.objects.filter(is_deleted=True)
+    # )
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
