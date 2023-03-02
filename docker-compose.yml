@@ -6,22 +6,9 @@ services:
     image: gantrel/skypro_nbityutskiy_todolist:latest
     command: python manage.py runserver 0.0.0.0:8000
     ports:
-    - "8000:8000"
-    environment:
-      POSTGRES_DB: "todolist"
-      POSTGRES_USER: 'todolist_user'
-      POSTGRES_PASSWORD: '159951'
-      DB_HOST: 'postgres'
-      #DB_HOST='localhost'
-      DB_PORT: '5432'
-      DJ_SECRET_KEY: 'django-insecure-!_3=8%7!(m+%kxcyjj7$#f6=+%s(d!*s&35git1x7x&+hy&w+8'
-      DJ_DEBUG: True
-      DATABASE_URL: 'postgres://todolist_user:159951@localhost/todolist'
-      DJANGO_ALLOWED_HOSTS: 'localhost 127.0.0.1 [::1] 0.0.0.0'
-      SOCIAL_AUTH_VK_OAUTH2_KEY: '51565260'
-      SOCIAL_AUTH_VK_OAUTH2_SECRET: 'iDUH1CNPEBU9FgIfu1hd'
-#    env_file:
-#      - .env_old
+      - "5000:8000"
+    env_file:
+      - .env_old
     depends_on:
       postgres:
         condition: service_healthy
@@ -58,8 +45,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    ports:
-    - "5432:5432"
 
 
 volumes:
