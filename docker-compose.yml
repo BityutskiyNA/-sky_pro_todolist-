@@ -7,6 +7,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     ports:
     - "8000:8000"
+    environment:
+      SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
     env_file:
       - .env
     depends_on:
