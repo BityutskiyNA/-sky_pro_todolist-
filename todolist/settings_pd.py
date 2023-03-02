@@ -15,5 +15,5 @@ class Settings_TDL(BaseSettings):
     SOCIAL_AUTH_VK_OAUTH2_KEY: str
     SOCIAL_AUTH_VK_OAUTH2_SECRET:str
 
-    class Config:
-         env_file = '../.env_local'
+    # class Config:
+    #      env_file = '../.env_local'
