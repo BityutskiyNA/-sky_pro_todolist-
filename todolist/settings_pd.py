@@ -4,9 +4,9 @@ from pydantic import BaseSettings
 
 
 class Settings_TDL(BaseSettings):
-    POSTGRES_DB: str = os.getenv("POSTGRES_DB")
-    POSTGRES_USER : str = os.getenv("POSTGRES_USER")
-    POSTGRES_PASSWORD : str = os.getenv("POSTGRES_PASSWORD")
+    POSTGRES_DB: str
+    POSTGRES_USER : str
+    POSTGRES_PASSWORD : str
     DB_HOST : str = os.getenv("DB_HOST")
     DB_PORT : str = os.getenv("DB_PORT")
     DJ_DEBUG : bool = os.getenv("DJ_DEBUG")
