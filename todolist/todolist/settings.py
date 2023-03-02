@@ -8,6 +8,9 @@ from envparse import env
 from settings_pd import Settings_TDL
 
 setings_bs = Settings_TDL()
+print(setings_bs)
+print(os.getenv("POSTGRES_DB"))
+print(os.getenv("DB_HOST"))
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-!_3=8%7!(m+%kxcyjj7$#f6=+%s(d!*s&35git1x7x&+hy&w+8'
