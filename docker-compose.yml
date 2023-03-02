@@ -21,7 +21,7 @@ services:
       SOCIAL_AUTH_VK_OAUTH2_KEY: '51565260'
       SOCIAL_AUTH_VK_OAUTH2_SECRET: 'iDUH1CNPEBU9FgIfu1hd'
 #    env_file:
-#      - .env
+#      - .env_old
     depends_on:
       postgres:
         condition: service_healthy
@@ -39,7 +39,7 @@ services:
       context: ./todolist/migrations
     image: gantrel/skypro_nbityutskiy_todolist:latest
     env_file:
-      - .env
+      - .env_old
     command: python3 manage.py migrate --noinput
     depends_on:
       postgres:
