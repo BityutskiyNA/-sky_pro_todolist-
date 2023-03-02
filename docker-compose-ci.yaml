@@ -5,7 +5,7 @@ services:
     restart: always
     command: python manage.py runserver 0.0.0.0:8000
     env_file:
-      - ../.env_old
+      - .env_old
     environment:
       POSTGRES_DB: $POSTGRES_DB
       POSTGRES_USER: $POSTGRES_USER
@@ -34,7 +34,7 @@ services:
     image: gantrel/skypro_nbityutskiy_todolist:$GITHUB_RUN_ID
     command: python manage.py migrate --noinput
     env_file:
-      - ../.env_old
+      - .env_old
     environment:
       POSTGRES_DB: $POSTGRES_DB
       POSTGRES_USER: $POSTGRES_USER
