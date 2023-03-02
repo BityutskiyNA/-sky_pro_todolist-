@@ -8,9 +8,9 @@ class Settings_TDL(BaseSettings):
     # DB_HOST='postgres'
     DB_HOST : str
     DB_PORT : str
-    DJ_SECRET_KEY : str
+    # DJ_SECRET_KEY : str
     DJ_DEBUG : bool
-    DATABASE_URL : str
+    # DATABASE_URL : str
     DJANGO_ALLOWED_HOSTS : str
     SOCIAL_AUTH_VK_OAUTH2_KEY: str
     SOCIAL_AUTH_VK_OAUTH2_SECRET:str
