@@ -34,6 +34,7 @@ jobs:
         run: |
           mkdir deploy
           cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
+          cp .env deploy/.env
           rm -f deploy/docker-compose-ci.yaml
       - name: Descrypt .env
         uses: anthonykgross/ansible-vault-cli-github-action@v1
