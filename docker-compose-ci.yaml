@@ -6,8 +6,16 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     env_file:
       - .env
-    ports:
-    - 8000:8000
+    environment:
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      DB_HOST: $DB_HOST_NAME
+      DB_PORT: $DB_PORT
+      DJ_DEBUG: $DJ_DEBUG
+      DJANGO_ALLOWED_HOSTS: $DJANGO_ALLOWED_HOSTS
+      SOCIAL_AUTH_VK_OAUTH2_KEY: $SOCIAL_AUTH_VK_OAUTH2_KEY
+      SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
     depends_on:
       postgres:
         condition: service_healthy
@@ -25,6 +33,16 @@ services:
     command: python manage.py migrate --noinput
     env_file:
       - .env
+    environment:
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      DB_HOST: $DB_HOST_NAME
+      DB_PORT: $DB_PORT
+      DJ_DEBUG: $DJ_DEBUG
+      DJANGO_ALLOWED_HOSTS: $DJANGO_ALLOWED_HOSTS
+      SOCIAL_AUTH_VK_OAUTH2_KEY: $SOCIAL_AUTH_VK_OAUTH2_KEY
+      SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
     depends_on:
       postgres:
         condition: service_healthy
@@ -40,8 +58,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    ports:
-    - "5432:5432"
 
 
 volumes:
