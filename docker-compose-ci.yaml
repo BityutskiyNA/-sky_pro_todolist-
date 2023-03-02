@@ -18,8 +18,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      migrations:
-        condition: service_completed_successfully
+#      migrations:
+#        condition: service_completed_successfully
 
   front:
     image: sermalenk/skypro-front:lesson-35
@@ -27,21 +27,21 @@ services:
     ports:
       - "80:80"
 
-  migrations:
-    image: gantrel/skypro_nbityutskiy_todolist:$GITHUB_RUN_ID
-#    command: python manage.py migrate --noinput
-    environment:
-      DB_HOST: $DB_HOST
-      DB_PORT: $DB_PORT
-      DJ_SECRET_KEY: $DJ_SECRET_KEY
-      DJ_DEBUG: $DJ_DEBUG
-      DATABASE_URL: $DATABASE_URL
-      DJANGO_ALLOWED_HOSTS: $DJANGO_ALLOWED_HOSTS
-      SOCIAL_AUTH_VK_OAUTH2_KEY: $SOCIAL_AUTH_VK_OAUTH2_KEY
-      SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
-    depends_on:
-      postgres:
-        condition: service_healthy
+#  migrations:
+#    image: gantrel/skypro_nbityutskiy_todolist:$GITHUB_RUN_ID
+##    command: python manage.py migrate --noinput
+#    environment:
+#      DB_HOST: $DB_HOST
+#      DB_PORT: $DB_PORT
+#      DJ_SECRET_KEY: $DJ_SECRET_KEY
+#      DJ_DEBUG: $DJ_DEBUG
+#      DATABASE_URL: $DATABASE_URL
+#      DJANGO_ALLOWED_HOSTS: $DJANGO_ALLOWED_HOSTS
+#      SOCIAL_AUTH_VK_OAUTH2_KEY: $SOCIAL_AUTH_VK_OAUTH2_KEY
+#      SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
 
   postgres:
     image: postgres:13.0-alpine
