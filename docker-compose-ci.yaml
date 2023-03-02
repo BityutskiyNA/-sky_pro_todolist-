@@ -5,14 +5,14 @@ services:
     restart: always
     command: python manage.py runserver 0.0.0.0:8000
     environment:
-      DB_HOST: ${{ secrets.DB_HOST }}
-      DB_PORT: ${{ $DB_PORT }}
-      DJ_SECRET_KEY: ${{ $DJ_SECRET_KEY }}
-      DJ_DEBUG: ${{ $DJ_DEBUG }}
-      DATABASE_URL: ${{ $DATABASE_URL }}
-      DJANGO_ALLOWED_HOSTS: ${{ $DJANGO_ALLOWED_HOSTS }}
-      SOCIAL_AUTH_VK_OAUTH2_KEY: ${{ $SOCIAL_AUTH_VK_OAUTH2_KEY }}
-      SOCIAL_AUTH_VK_OAUTH2_SECRET: ${{ $SOCIAL_AUTH_VK_OAUTH2_SECRET }}
+      DB_HOST: $DB_HOST
+      DB_PORT: $DB_PORT
+      DJ_SECRET_KEY: $DJ_SECRET_KEY
+      DJ_DEBUG: $DJ_DEBUG
+      DATABASE_URL: $DATABASE_URL
+      DJANGO_ALLOWED_HOSTS: $DJANGO_ALLOWED_HOSTS
+      SOCIAL_AUTH_VK_OAUTH2_KEY: $SOCIAL_AUTH_VK_OAUTH2_KEY
+      SOCIAL_AUTH_VK_OAUTH2_SECRET: $SOCIAL_AUTH_VK_OAUTH2_SECRET
     ports:
     - 5000:5000
     depends_on:
