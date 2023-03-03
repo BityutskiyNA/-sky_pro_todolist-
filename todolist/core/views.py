@@ -8,11 +8,11 @@ from django.contrib.auth import login, logout
 from .models import User
 from .serializers import UserCreateSerializer, UserUpdateSerialiser, LoginSerializer, UpdatePasswordSerializer
 from rest_framework.response import Response
-
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class UserCreateView(CreateAPIView):
     serializer_class = UserCreateSerializer
 
-
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class UserLogonView(CreateAPIView):
     serializer_class = LoginSerializer
 
@@ -27,7 +27,7 @@ class UserLogonView(CreateAPIView):
     def perform_create(self, serializer):
         user = serializer.save()
         login(request=self.request, user=user)
-        
+
 # @method_decorator(csrf_exempt, name='dispatch')
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
@@ -45,6 +45,7 @@ class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 # @method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class PasswordUpdateAPIView(UpdateAPIView):
     permission_classes =  [IsAuthenticated]
     serializer_class = UpdatePasswordSerializer
