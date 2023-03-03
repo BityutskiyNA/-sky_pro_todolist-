@@ -9,14 +9,11 @@ setings_bs = Settings_TDL()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-!_3=8%7!(m+%kxcyjj7$#f6=+%s(d!*s&35git1x7x&+hy&w+8'
-# DEBUG = setings_bs.DJ_DEBUG
-DEBUG = True
-# ALLOWED_HOSTS = setings_bs.DJANGO_ALLOWED_HOSTS.split(" ")
+DEBUG = setings_bs.DJ_DEBUG
+
 ALLOWED_HOSTS =['localhost', '127.0.0.1', '[::1]', '0.0.0.0','bityutskiyna-skypro-td.space']
 
-# CSRF_TRUSTED_ORIGINS = [
-#      "bityutskiyna-skypro-td.space"
-# ]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,7 +36,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'todolist.utils.DisableCSRF',
 ]
 
 ROOT_URLCONF = 'todolist.urls'
@@ -105,12 +101,6 @@ CSRF_COOKIE_SECURE = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = (
-    # 'social_core.backends.open_id.OpenIdAuth',
-    # 'social_core.backends.google.GoogleOpenId',
-    # 'social_core.backends.google.GoogleOAuth2',
-    # 'social_core.backends.google.GoogleOAuth',
-    # 'social_core.backends.twitter.TwitterOAuth',
-    # 'social_core.backends.yahoo.YahooOpenId',
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.vk.VKOAuth2',
 )
@@ -120,7 +110,6 @@ SOCIAL_AUTH_VK_OAUTH2_SECRET = setings_bs.SOCIAL_AUTH_VK_OAUTH2_SECRET
 SOCIAL_AUTH_LOGIN_NAMESPACE = 'social'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL  = '/'
 SOCIAL_AUTH_LOGIN_ERROR_URL ='/login-error/'
-# SOCIAL_AUTH_LOGIN_URL=''
 SOCIAL_AUTH_VK_OAUTH2_SCOPE=['email']
 SOCIAL_AUTH_VK_EXTRA_DATA=[('email','email')]
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL='/logged-in/'

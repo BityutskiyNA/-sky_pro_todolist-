@@ -8,6 +8,8 @@ from django.contrib.auth import login, logout
 from .models import User
 from .serializers import UserCreateSerializer, UserUpdateSerialiser, LoginSerializer, UpdatePasswordSerializer
 from rest_framework.response import Response
+
+
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class UserCreateView(CreateAPIView):
     serializer_class = UserCreateSerializer
@@ -28,7 +30,6 @@ class UserLogonView(CreateAPIView):
         user = serializer.save()
         login(request=self.request, user=user)
 
-# @method_decorator(csrf_exempt, name='dispatch')
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
@@ -39,12 +40,10 @@ class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     def get_object(self):
         return self.request.user
 
-    # @method_decorator(ensure_csrf_cookie)
     def destroy(self, request, *args, **kwargs):
         logout(request)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# @method_decorator(csrf_exempt, name='dispatch')
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class PasswordUpdateAPIView(UpdateAPIView):
     permission_classes =  [IsAuthenticated]
