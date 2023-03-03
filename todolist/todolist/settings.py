@@ -16,9 +16,9 @@ DEBUG = True
 # ALLOWED_HOSTS = setings_bs.DJANGO_ALLOWED_HOSTS.split(" ")
 ALLOWED_HOSTS =['localhost', '127.0.0.1', '[::1]', '0.0.0.0','bityutskiyna-skypro-td.space']
 
-CSRF_TRUSTED_ORIGINS = [
-     "bityutskiyna-skypro-td.space"
-]
+# CSRF_TRUSTED_ORIGINS = [
+#      "bityutskiyna-skypro-td.space"
+# ]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
