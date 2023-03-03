@@ -29,7 +29,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
 class UserUpdateSerialiser(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('username','first_name','last_name', 'email')
 
 class LoginSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True)

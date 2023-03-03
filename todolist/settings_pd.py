@@ -14,7 +14,5 @@ class Settings_TDL(BaseSettings):
     SOCIAL_AUTH_VK_OAUTH2_KEY: str = os.getenv("SOCIAL_AUTH_VK_OAUTH2_KEY")
     SOCIAL_AUTH_VK_OAUTH2_SECRET:str = os.getenv("SOCIAL_AUTH_VK_OAUTH2_SECRET")
 
-    # class Config:
-    #     validate_all = False
-    #     validate_assignment = False
-    # #      env_file = '../.env_local'
+    class Config:
+          env_file = '../.env_local'
