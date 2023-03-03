@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!_3=8%7!(m+%kxcyjj7$#f6=+%s(d!*s&35git1x7x&+hy&w+8'
 DEBUG = setings_bs.DJ_DEBUG
 # ALLOWED_HOSTS = setings_bs.DJANGO_ALLOWED_HOSTS.split(" ")
-ALLOWED_HOSTS =['localhost', '127.0.0.1', '[::1]', '0.0.0.0','[:::]']
+ALLOWED_HOSTS =['localhost', '127.0.0.1', '[::1]', '0.0.0.0','bityutskiyna-skypro-td.space']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
