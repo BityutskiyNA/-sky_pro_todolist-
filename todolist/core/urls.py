@@ -12,5 +12,5 @@ urlpatterns = [
     path('login', views.UserLogonView.as_view()),
     path('profile',csrf_exempt(views.UserRetrieveUpdateDestroyView.as_view() )),
     path('signup', views.UserCreateView.as_view()),
-    path('update_password', views.PasswordUpdateAPIView.as_view()),
+    path('update_password', csrf_exempt(views.PasswordUpdateAPIView.as_view())),
 ]
