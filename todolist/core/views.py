@@ -12,7 +12,7 @@ from rest_framework.response import Response
 class UserCreateView(CreateAPIView):
     serializer_class = UserCreateSerializer
 
-@method_decorator(csrf_exempt)
+@method_decorator(csrf_exempt, name='dispatch')
 class UserLogonView(CreateAPIView):
     serializer_class = LoginSerializer
 
@@ -29,7 +29,7 @@ class UserLogonView(CreateAPIView):
         login(request=self.request, user=user)
 
 # @method_decorator(ensure_csrf_cookie)
-@method_decorator(csrf_exempt)
+@method_decorator(csrf_exempt, name='dispatch')
 class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerialiser
@@ -44,7 +44,7 @@ class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         logout(request)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-@method_decorator(csrf_exempt)
+@method_decorator(csrf_exempt, name='dispatch')
 class PasswordUpdateAPIView(UpdateAPIView):
     permission_classes =  [IsAuthenticated]
     serializer_class = UpdatePasswordSerializer
