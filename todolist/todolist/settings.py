@@ -36,7 +36,8 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    '.utils.DisableCSRF',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -125,6 +126,9 @@ SOCIAL_AUTH_VK_OAUTH2_SCOPE=['email']
 SOCIAL_AUTH_VK_EXTRA_DATA=[('email','email')]
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL='/logged-in/'
 SOCIAL_AUTH_USER_MODEL='core.User'
+
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPONLY = False
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'

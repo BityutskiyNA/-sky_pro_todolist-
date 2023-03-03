@@ -39,7 +39,7 @@ class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     def get_object(self):
         return self.request.user
 
-    @method_decorator(ensure_csrf_cookie)
+    @ensure_csrf_cookie
     def destroy(self, request, *args, **kwargs):
         logout(request)
         return Response(status=status.HTTP_204_NO_CONTENT)
