@@ -16,14 +16,14 @@ class UserCreateView(CreateAPIView):
 class UserLogonView(CreateAPIView):
     serializer_class = LoginSerializer
 
-    @method_decorator(ensure_csrf_cookie)
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    @method_decorator(ensure_csrf_cookie)
+
     def perform_create(self, serializer):
         user = serializer.save()
         login(request=self.request, user=user)
@@ -34,11 +34,11 @@ class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserUpdateSerialiser
     permission_classes = [IsAuthenticated]
 
-    @method_decorator(ensure_csrf_cookie)
+
     def get_object(self):
         return self.request.user
 
-    @method_decorator(ensure_csrf_cookie)
+
     def destroy(self, request, *args, **kwargs):
         logout(request)
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -47,6 +47,6 @@ class PasswordUpdateAPIView(UpdateAPIView):
     permission_classes =  [IsAuthenticated]
     serializer_class = UpdatePasswordSerializer
 
-    @method_decorator(ensure_csrf_cookie)
+
     def get_object(self):
         return self.request.user
