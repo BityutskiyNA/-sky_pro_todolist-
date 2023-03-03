@@ -12,7 +12,7 @@ from rest_framework.response import Response
 class UserCreateView(CreateAPIView):
     serializer_class = UserCreateSerializer
 
-@method_decorator(csrf_exempt, name='dispatch')
+
 class UserLogonView(CreateAPIView):
     serializer_class = LoginSerializer
 
