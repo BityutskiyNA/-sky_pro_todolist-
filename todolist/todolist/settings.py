@@ -1,11 +1,9 @@
-
 import os
 from pathlib import Path
 import dj_database_url
 from envparse import env
-
-
 from settings_pd import Settings_TDL
+
 
 setings_bs = Settings_TDL()
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,10 +35,10 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
-    'utils.DisableCSRF',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'todolist.utils.DisableCSRF',
 ]
 
 ROOT_URLCONF = 'todolist.urls'
