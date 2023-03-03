@@ -9,8 +9,8 @@ from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 
 
 urlpatterns = [
-    path('login', csrf_exempt(views.UserLogonView.as_view())),
-    path('profile',csrf_exempt(views.UserRetrieveUpdateDestroyView.as_view() )),
-    path('signup', csrf_exempt(views.UserCreateView.as_view()) ),
-    path('update_password', csrf_exempt(views.PasswordUpdateAPIView.as_view())),
+    path('login', ensure_csrf_cookie(views.UserLogonView.as_view())),
+    path('profile',ensure_csrf_cookie(views.UserRetrieveUpdateDestroyView.as_view() )),
+    path('signup', ensure_csrf_cookie(views.UserCreateView.as_view()) ),
+    path('update_password', ensure_csrf_cookie(views.PasswordUpdateAPIView.as_view())),
 ]
