@@ -8,7 +8,7 @@ from settings_pd import Settings_TDL
 setings_bs = Settings_TDL()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-!_3=8%7!(m+%kxcyjj7$#f6=+%s(d!*s&35git1x7x&+hy&w+8'
+SECRET_KEY = setings_bs.DJ_SECRET_KEY
 DEBUG = setings_bs.DJ_DEBUG
 
 ALLOWED_HOSTS =['localhost', '127.0.0.1', '[::1]', '0.0.0.0','bityutskiyna-skypro-td.space']
@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django_filters',
     'django.contrib.staticfiles',
     'social_django',
     'rest_framework',
@@ -28,7 +29,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'core.middleware.utils.DisableCSRF',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -119,5 +119,6 @@ CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE':10
 }

@@ -10,11 +10,10 @@ from .serializers import UserCreateSerializer, UserUpdateSerialiser, LoginSerial
 from rest_framework.response import Response
 
 
-@method_decorator(ensure_csrf_cookie, name='dispatch')
 class UserCreateView(CreateAPIView):
     serializer_class = UserCreateSerializer
 
-@method_decorator(ensure_csrf_cookie, name='dispatch')
+
 class UserLogonView(CreateAPIView):
     serializer_class = LoginSerializer
 
@@ -30,9 +29,8 @@ class UserLogonView(CreateAPIView):
         user = serializer.save()
         login(request=self.request, user=user)
 
-@method_decorator(ensure_csrf_cookie, name='dispatch')
+
 class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
     serializer_class = UserUpdateSerialiser
     permission_classes = [IsAuthenticated]
 
@@ -44,10 +42,10 @@ class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         logout(request)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-@method_decorator(ensure_csrf_cookie, name='dispatch')
+
 class PasswordUpdateAPIView(UpdateAPIView):
     permission_classes =  [IsAuthenticated]
     serializer_class = UpdatePasswordSerializer
 
     def get_object(self):
-        return self.request.user
+        return Response(status=status.HTTP_200_OK)
