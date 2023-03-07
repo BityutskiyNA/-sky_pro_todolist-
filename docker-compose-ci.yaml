@@ -69,7 +69,8 @@ services:
 
 
   bot:
-    image: gantrel/skypro_nbityutskiy_todolist:latest
+    image: gantrel/skypro_nbityutskiy_todolist:$GITHUB_RUN_ID
+    restart: always
     env_file:
       - .env
     command: python manage.py runbot
