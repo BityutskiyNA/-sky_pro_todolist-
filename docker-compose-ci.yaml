@@ -72,7 +72,7 @@ services:
     image: gantrel/skypro_nbityutskiy_todolist:latest
     env_file:
       - .env
-    command: python3 manage.py runbot
+    command: python manage.py runbot
     depends_on:
       postgres:
         condition: service_healthy
