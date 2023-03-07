@@ -16,7 +16,7 @@ services:
         condition: service_completed_successfully
 
   front:
-    image: sermalenk/skypro-front:lesson-36
+    image: sermalenk/skypro-front:lesson-38
     restart: always
     ports:
       - "80:80"
@@ -48,6 +48,25 @@ services:
     ports:
       - '5432:5432'
 
+
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+
+  bot:
+    image: gantrel/skypro_nbityutskiy_todolist:latest
+    env_file:
+      - .env_old
+    restart: always
+    command: python3 manage.py runbot
+    depends_on:
+      postgres:
+        condition: service_healthy
+      api:
+        condition: service_started
 
 volumes:
   postgres_data:

@@ -60,6 +60,25 @@ services:
       timeout: 5s
       retries: 5
 
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass $REDIS_PASSWORD
+
+
+  bot:
+    image: gantrel/skypro_nbityutskiy_todolist:latest
+    env_file:
+      - .env
+    command: python3 manage.py runbot
+    depends_on:
+      postgres:
+        condition: service_healthy
+      api:
+        condition: service_started
+
 
 volumes:
   postgres_data:

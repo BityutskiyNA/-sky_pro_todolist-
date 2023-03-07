@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'core',
     'goals',
+    'bot',
 ]
 
 MIDDLEWARE = [
@@ -120,5 +121,6 @@ CSRF_COOKIE_HTTPONLY = False
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE':10
+    # 'PAGE_SIZE':10
 }
+BOT_TOKEN = setings_bs.BOT_TOKEN
