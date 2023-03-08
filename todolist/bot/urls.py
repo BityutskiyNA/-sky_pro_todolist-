@@ -8,5 +8,5 @@ from bot import views
 
 
 urlpatterns = [
-    path("verify", csrf_exempt(views.VerificationView.as_view())),
+    path("verify", views.VerificationView.as_view()),
 ]

@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3.10-slim
+FROM python:3.09-slim
 
 # set work directory
 WORKDIR /usr/src/todolist

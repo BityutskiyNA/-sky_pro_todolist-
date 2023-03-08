@@ -6,19 +6,19 @@ from . import views
 
 
 urlpatterns = [
-    path("board/create",  csrf_exempt(views.BoardCreateView.as_view())),
-    path("board/list",  csrf_exempt(views.BoardListView.as_view())),
-    path("board/<pk>",  csrf_exempt(views.BoardView.as_view())),
+    path("board/create",  views.BoardCreateView.as_view()),
+    path("board/list",  views.BoardListView.as_view()),
+    path("board/<pk>",  views.BoardView.as_view()),
 
-    path("goal_category/create",  csrf_exempt(views.GoalCategoryCreateView.as_view())),
-    path("goal_category/list",  csrf_exempt(views.GoalCategoryListView.as_view())),
-    path("goal_category/<pk>",  csrf_exempt(views.GoalCategoryView.as_view())),
+    path("goal_category/create",  views.GoalCategoryCreateView.as_view()),
+    path("goal_category/list",  views.GoalCategoryListView.as_view()),
+    path("goal_category/<pk>",  views.GoalCategoryView.as_view()),
 
-    path("goal/create",  csrf_exempt(views.GoalCreateView.as_view())),
-    path("goal/list",  csrf_exempt(views.GoalListView.as_view())),
-    path("goal/<pk>",  csrf_exempt(views.GoalView.as_view())),
+    path("goal/create",  views.GoalCreateView.as_view()),
+    path("goal/list",  views.GoalListView.as_view()),
+    path("goal/<pk>",  views.GoalView.as_view()),
 
-    path("goal_comment/create",  csrf_exempt(views.CommentCreateView.as_view())),
-    path("goal_comment/list",  csrf_exempt(views.CommentListView.as_view())),
-    path("goal_comment/<pk>",  csrf_exempt(views.CommentView.as_view())),
+    path("goal_comment/create",  views.CommentCreateView.as_view()),
+    path("goal_comment/list",  views.CommentListView.as_view()),
+    path("goal_comment/<pk>",  views.CommentView.as_view()),
 ]
