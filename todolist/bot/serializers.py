@@ -1,9 +1,5 @@
-import sys
-
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-
-sys.path.append("D:\\python_pr\\sky_pro_f_pr\\todolist\\")
 from bot.models import TgUser
 
 class TgUserSerializer(serializers.ModelSerializer):
