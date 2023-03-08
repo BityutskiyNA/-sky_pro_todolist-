@@ -13,7 +13,7 @@ from bot.serializers import TgUserSerializer
 from bot.tg.client import TgClient
 
 
-@method_decorator(ensure_csrf_cookie, name='dispatch')
+# @method_decorator(ensure_csrf_cookie, name='dispatch')
 class VerificationView(UpdateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = TgUserSerializer
