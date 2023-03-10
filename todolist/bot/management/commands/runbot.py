@@ -14,8 +14,8 @@ from goals.models import Goal, GoalCategory
 from bot.tg.client import TgClient
 from settings_pd import Settings_TDL
 
-
 setings_bs = Settings_TDL()
+
 
 class Command(BaseCommand):
 
@@ -28,14 +28,13 @@ class Command(BaseCommand):
         self.logger.info('Bot start pooling')
 
     @property
-    def tg_user(self):
+    def tg_user(self) -> TgUser:
         if self.__tg_user:
             return self.__tg_user
         raise RuntimeError('User not exist')
 
-
     @staticmethod
-    def _get_verification_code()->str:
+    def _get_verification_code() -> str:
         return os.urandom(12).hex()
 
     def handle(self, *args, **options):
@@ -47,7 +46,7 @@ class Command(BaseCommand):
 
                 self.__tg_user, _ = TgUser.objects.get_or_create(
                     chat_id=item.message.chat.id,
-                    defaults={'username':item.message.from_.username}
+                    defaults={'username': item.message.from_.username}
                 )
                 if self.__tg_user.user_id:
                     self._handle_verifed_user(item.message)
@@ -69,7 +68,6 @@ class Command(BaseCommand):
         else:
             self._hadle_message(message)
 
-
     def _hadle_command(self, message: Message):
         if isinstance(message.text, str) and message.text == '/goals':
             self._handle_goal_command(message)
@@ -80,7 +78,6 @@ class Command(BaseCommand):
         else:
             raise NotImplementedError
 
-
     def _hadle_message(self, message: Message):
         goal_state = self.redis_cache.lrange(self.__tg_user.user_id, 0, -1)
 
@@ -88,28 +85,28 @@ class Command(BaseCommand):
             category = GoalCategory.objects.filter(user_id=self.tg_user.user_id, title=message.text)
             if len(category) == 0:
                 self.tg_client.send_message(chat_id=message.chat.id,
-                    text='Категория с таким названием не найдена, введите корректную категорию')
+                                            text='Категория с таким названием не найдена, введите корректную категорию')
             else:
                 self.redis_cache.rpush(self.__tg_user.user_id, message.text)
-                self.tg_client.send_message(chat_id=message.chat.id,text='Укажите название цели')
+                self.tg_client.send_message(chat_id=message.chat.id, text='Укажите название цели')
         elif len(goal_state) == 2:
             category_title = goal_state[1]
             category = GoalCategory.objects.filter(user_id=self.tg_user.user_id, title=category_title)
             if len(category) != 0:
                 goal_list = {
-                        'category':category[0],
-                        'title': message.text,
-                    }
+                    'category': category[0],
+                    'title': message.text,
+                }
                 self._create_goal(goal_list)
-                self.tg_client.send_message(chat_id=message.chat.id,text='Задание создано')
+                self.tg_client.send_message(chat_id=message.chat.id, text='Задание создано')
                 self.redis_cache.delete(self.__tg_user.user_id)
 
-    def _handle_goal_command(self,message: Message):
-        goals =list(
+    def _handle_goal_command(self, message: Message):
+        goals = list(
             Goal.objects.filter(user_id=self.tg_user.user_id)
             .exclude(status=Goal.Status.archived)
             .values_list('title', flat=True)
-            )
+        )
         if goals:
             self.tg_client.send_message(
                 chat_id=message.chat.id,
@@ -122,25 +119,24 @@ class Command(BaseCommand):
             )
 
     def _get_cache(self):
-        r = redis.StrictRedis(
+        return redis.StrictRedis(
             host=setings_bs.REDIS_HOST,
             port=setings_bs.REDIS_PORT,
             password=setings_bs.REDIS_PASSWORD,
-            charset = "utf-8",
+            charset="utf-8",
             decode_responses=True,
         )
-        return r
 
     def _handle_goal_create_command(self, message: Message):
         self.redis_cache.delete(self.__tg_user.user_id)
-        self.redis_cache.rpush(self.__tg_user.user_id,'goal_create')
+        self.redis_cache.rpush(self.__tg_user.user_id, 'goal_create')
         self.tg_client.send_message(
             chat_id=message.chat.id,
             text='Укажите категорию для цели'
         )
         goals_category = list(
             GoalCategory.objects.filter(user_id=self.tg_user.user_id).values_list('title', flat=True)
-            )
+        )
         self.tg_client.send_message(
             chat_id=message.chat.id,
             text='\n'.join(goals_category)
@@ -154,9 +150,9 @@ class Command(BaseCommand):
         )
 
     def _create_goal(self, goal_list):
-         Goal.objects.create(
+        Goal.objects.create(
             title=goal_list['title'],
             category=goal_list['category'],
             description=goal_list['title'],
-            user= self.tg_user.user,
+            user=self.tg_user.user,
         )

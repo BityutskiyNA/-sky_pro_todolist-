@@ -11,12 +11,11 @@ class VerificationView(UpdateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = TgUserSerializer
 
-    def update(self, request, *args, **kwargs):
-        serializer:  TgUserSerializer = self.get_serializer(data=request.data)
+    def update(self, request, *args, **kwargs) -> Response:
+        serializer: TgUserSerializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
-
 
     def perform_update(self, serializer):
         tg_user = serializer.save()

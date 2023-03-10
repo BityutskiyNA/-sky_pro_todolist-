@@ -28,6 +28,7 @@ def create_objects(apps, schema_editor):
             # проставляем всем категориям пользователя его доску
             GoalCategory.objects.filter(user_id=user_id).update(board=new_board)
 
+
 class Migration(migrations.Migration):
 
     dependencies = [
